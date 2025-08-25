@@ -1,0 +1,334 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Most Serious Website Ever™</title>
+  <style>
+    :root{
+      --bg: #0f1226;
+      --card: #1a1f3c;
+      --text: #e7e9ff;
+      --accent: #8b5cf6;
+      --accent-2: #22d3ee;
+      --success: #34d399;
+      --warn: #f59e0b;
+      --danger: #ef4444;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background: radial-gradient(1200px 800px at 10% -10%, #1b2148, transparent),
+                  radial-gradient(1000px 700px at 110% 20%, #0e1230, transparent),
+                  var(--bg);
+      color:var(--text);
+      overflow-x:hidden;
+    }
+    .stars{
+      position:fixed; inset:0; pointer-events:none; z-index:0;
+      background-image: radial-gradient(2px 2px at 20% 30%, #fff8, transparent),
+                        radial-gradient(1px 1px at 70% 10%, #fff5, transparent),
+                        radial-gradient(2px 2px at 40% 80%, #fff7, transparent),
+                        radial-gradient(1px 1px at 90% 60%, #fff6, transparent);
+      animation: twinkle 6s linear infinite alternate;
+    }
+    @keyframes twinkle{from{opacity:.6} to{opacity:1}}header{
+  position:sticky; top:0; z-index:10; backdrop-filter: blur(8px);
+  background: linear-gradient(180deg, #0f1226cc, #0f122600);
+  border-bottom:1px solid #ffffff1a;
+}
+.container{max-width:980px; margin:0 auto; padding:20px}
+
+.hero{
+  display:grid; gap:14px; align-items:center; grid-template-columns: 1fr auto;
+  padding: 40px 0 10px;
+}
+.title{font-size: clamp(28px, 5vw, 48px); line-height:1.05; font-weight:800;}
+.subtitle{opacity:.8}
+
+.card{
+  background: linear-gradient(180deg, #1b2148, #131735);
+  border: 1px solid #ffffff14;
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 10px 30px #0006, inset 0 1px 0 #ffffff18;
+}
+
+.row{display:flex; gap:14px; flex-wrap:wrap}
+.grow{flex:1 1 260px}
+
+button, .btn{
+  appearance:none; border:0; cursor:pointer; color:white; font-weight:700;
+  padding:12px 16px; border-radius: 14px; position:relative; overflow:hidden;
+  background: linear-gradient(180deg, var(--accent), #6736f0);
+  box-shadow: 0 8px 20px #8b5cf646;
+  transition: transform .15s ease, box-shadow .15s ease, filter .2s ease;
+}
+button:hover{transform: translateY(-1px); box-shadow:0 12px 30px #8b5cf666}
+button:active{transform: translateY(0); filter: brightness(.95)}
+
+.linky{color:var(--accent-2); text-decoration:none; border-bottom:1px dashed #22d3ee88}
+
+.ticker{white-space:nowrap; overflow:hidden; mask:linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent)}
+.ticker span{display:inline-block; padding-right:30px; animation: marquee 14s linear infinite}
+@keyframes marquee{0%{transform:translateX(0)} 100%{transform:translateX(-100%)}}
+
+/* Prank bits */
+.runaway{position:relative}
+.runaway:hover{animation: scoot .3s linear both}
+@keyframes scoot{to{transform: translate(calc(var(--x, 0) * 1px), calc(var(--y, 0) * 1px))}}
+
+.shaky{display:inline-block}
+.shaky:hover{animation: shake .4s linear infinite}
+@keyframes shake{0%{transform:rotate(0)}25%{transform:rotate(3deg)}50%{transform:rotate(0)}75%{transform:rotate(-3deg)}100%{transform:rotate(0)}}
+
+.progress{
+  height:12px; background:#ffffff12; border-radius:999px; overflow:hidden; position:relative
+}
+.bar{height:100%; width:0%; background:linear-gradient(90deg, var(--accent), var(--accent-2)); box-shadow:inset 0 0 10px #0008}
+
+.fake-modal{
+  position:fixed; inset:0; display:none; place-items:center; background:#0009; z-index:20
+}
+.fake-modal.active{display:grid}
+.modal-card{background:#121531; border:1px solid #ffffff22; border-radius:18px; width:min(560px, 92vw); padding:18px}
+
+.foot{opacity:.7; font-size:12px; text-align:center; padding:24px}
+
+.rainbow{background: conic-gradient(from 0deg, #f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00); -webkit-background-clip:text; background-clip:text; color:transparent}
+
+canvas#confetti{position:fixed; inset:0; pointer-events:none; z-index:30}
+
+  </style>
+</head>
+<body>
+  <div class="stars"></div>
+  <canvas id="confetti"></canvas>
+  <header>
+    <div class="container">
+      <div class="ticker">
+        <span>🚀 Now loading extremely important seriousness...</span>
+        <span>🧠 Calibrating hyper-intelligence... 99%... 99%... still 99%...</span>
+        <span>🥸 Trust us, we are professionals on the internet.</span>
+      </div>
+    </div>
+  </header>  <main class="container">
+    <section class="hero">
+      <div>
+        <div class="title">Welcome to the <span class="rainbow">Totally Serious Utility</span> 🔧</div>
+        <div class="subtitle">A helpful tool that absolutely does something. Pinky promise.</div>
+      </div>
+      <button id="bigAction" class="runaway shaky">Do Important Thing</button>
+    </section><section class="row">
+  <div class="card grow">
+    <h3>Step 1: Verify You're Human</h3>
+    <p>Complete the following CAPTCHA: <strong>Type the word "human" backward</strong>.</p>
+    <div class="row">
+      <input id="captcha" placeholder="Type here" style="flex:1 1 160px; padding:12px; border-radius:12px; border:1px solid #ffffff22; background:#0d1030; color:var(--text)">
+      <button id="submitCaptcha">Submit</button>
+    </div>
+    <div style="height:10px"></div>
+    <div class="progress"><div id="progressBar" class="bar"></div></div>
+    <small id="progressNote">Progress: 0%</small>
+  </div>
+
+  <div class="card grow">
+    <h3>Step 2: Choose Your Mode</h3>
+    <label style="display:flex; align-items:center; gap:10px; margin-bottom:8px">
+      <input type="checkbox" id="modeWiggle"> Wiggle Everything
+    </label>
+    <label style="display:flex; align-items:center; gap:10px; margin-bottom:8px">
+      <input type="checkbox" id="modeInvert"> Upside-Down Text
+    </label>
+    <label style="display:flex; align-items:center; gap:10px; margin-bottom:8px">
+      <input type="checkbox" id="modeConfetti"> Confetti (always the right choice)
+    </label>
+    <div class="row" style="margin-top:8px">
+      <button id="applyModes">Apply Modes</button>
+      <button id="resetModes" style="background:linear-gradient(180deg,#64748b,#475569)">Reset</button>
+    </div>
+  </div>
+</section>
+
+<section class="card" style="margin-top:14px">
+  <h3>Frequently Asked Questions</h3>
+  <details open>
+    <summary>What does this website do?</summary>
+    <p>Yes.</p>
+  </details>
+  <details>
+    <summary>Is my data safe?</summary>
+    <p>We store all data in a highly secure imaginary box guarded by two rubber ducks.</p>
+  </details>
+  <details>
+    <summary>How do I proceed?</summary>
+    <p>Click the big button above. If it escapes, try again. Persistence builds character.</p>
+  </details>
+</section>
+
+<section class="row" style="margin-top:14px">
+  <div class="card grow">
+    <h3>Totally Not A Fake Pop-up</h3>
+    <p>Press this suspicious button for a totally normal message.</p>
+    <button id="popBtn">Show Message</button>
+  </div>
+  <div class="card grow">
+    <h3>Ultra-Official Status</h3>
+    <p id="status">🟣 System standing by...</p>
+    <button id="statusBtn">Enhance Status</button>
+  </div>
+</section>
+
+<p class="foot">Built with ❤️ for harmless pranks. Be kind: keep it playful, never targeted or mean.
+  <br/>Pro tip: Share this with a friend and watch them chase the button.
+</p>
+
+  </main>  <div class="fake-modal" id="modal">
+    <div class="modal-card">
+      <h3>✨ Congratulations!</h3>
+      <p>You have discovered the secret of productivity: confetti. Lots of it.</p>
+      <div class="row" style="margin-top:8px">
+        <button id="modalOk">Ok wow</button>
+        <button id="modalMore" style="background:linear-gradient(180deg,#22d3ee,#0891b2)">More confetti!</button>
+      </div>
+    </div>
+  </div>  <script>
+    // Utility helpers
+    const rand = (min, max)=> Math.random() * (max - min) + min;
+    const clamp = (v, a, b)=> Math.max(a, Math.min(b, v));
+
+    // Runaway button effect
+    const big = document.getElementById('bigAction');
+    function placeRunaway(e){
+      const rect = big.getBoundingClientRect();
+      const vw = window.innerWidth, vh = window.innerHeight;
+      // Random offset away from cursor
+      const dx = (rect.x + rect.width/2) - e.clientX;
+      const dy = (rect.y + rect.height/2) - e.clientY;
+      const mag = Math.hypot(dx, dy) || 1;
+      const ux = dx / mag, uy = dy / mag;
+      const dist = rand(120, 220);
+      let nx = rect.x + ux * dist;
+      let ny = rect.y + uy * dist;
+      nx = clamp(nx, 10, vw - rect.width - 10);
+      ny = clamp(ny, 80, vh - rect.height - 10);
+      big.style.position = 'fixed';
+      big.style.left = nx + 'px';
+      big.style.top = ny + 'px';
+      big.style.setProperty('--x', rand(-40,40));
+      big.style.setProperty('--y', rand(-40,40));
+    }
+    big.addEventListener('mouseenter', placeRunaway);
+    big.addEventListener('click', ()=> alert('So close! Try again 😏'));
+
+    // Fake progress and captcha
+    const bar = document.getElementById('progressBar');
+    const note = document.getElementById('progressNote');
+    let prog = 0; let stuckAt = 99;
+    function tick(){
+      prog = (prog + Math.random()*8) % stuckAt;
+      bar.style.width = prog + '%';
+      note.textContent = `Progress: ${prog.toFixed(0)}%`;
+    }
+    setInterval(tick, 600);
+
+    document.getElementById('submitCaptcha').addEventListener('click', () =>{
+      const val = (document.getElementById('captcha').value || '').trim().toLowerCase();
+      if(val === 'namuh'){
+        stuckAt = 100; // allow progress to finish
+        let p=prog; const fin = setInterval(()=>{
+          p = Math.min(100, p+5); bar.style.width = p + '%';
+          note.textContent = `Progress: ${p.toFixed(0)}%`;
+          if(p >= 100){ clearInterval(fin); confettiBurst(200); note.textContent = 'Progress: 100% (nice)'; }
+        }, 60);
+      } else {
+        alert('Close, but no banana. Hint: backward!');
+        confettiBurst(40);
+      }
+    });
+
+    // Modes
+    const applyBtn = document.getElementById('applyModes');
+    const resetBtn = document.getElementById('resetModes');
+    applyBtn.addEventListener('click', ()=>{
+      document.body.classList.toggle('wiggle', document.getElementById('modeWiggle').checked);
+      document.body.classList.toggle('invertText', document.getElementById('modeInvert').checked);
+      if(document.getElementById('modeConfetti').checked) confettiBurst(150);
+    });
+    resetBtn.addEventListener('click', ()=>{
+      document.body.classList.remove('wiggle','invertText');
+      confettiBurst(60);
+    });
+
+    // Global wiggle + upside-down styles via JS (to avoid heavy CSS by default)
+    const style = document.createElement('style');
+    style.textContent = `
+      .wiggle *{animation: shake .6s linear infinite}
+      .invertText { filter: hue-rotate(180deg) saturate(1.2)}
+      .invertText *{ transform: rotate(180deg); display:inline-block }
+    `;
+    document.head.appendChild(style);
+
+    // Fake modal
+    const modal = document.getElementById('modal');
+    document.getElementById('popBtn').addEventListener('click', ()=>{
+      modal.classList.add('active');
+      confettiBurst(120);
+    });
+    document.getElementById('modalOk').addEventListener('click', ()=> modal.classList.remove('active'));
+    document.getElementById('modalMore').addEventListener('click', ()=> confettiBurst(220));
+
+    // Status cycler
+    const statuses = [
+      '🟣 System standing by...',
+      '🔵 Optimizing vibes...',
+      '🟢 All snacks accounted for.',
+      '🟡 Calibrating jokes per minute...',
+      '🟠 Warming up confetti cannon...',
+      '🟢 Operational (ish).'
+    ];
+    const statusEl = document.getElementById('status');
+    document.getElementById('statusBtn').addEventListener('click', ()=>{
+      const next = statuses[Math.floor(Math.random()*statuses.length)];
+      statusEl.textContent = next;
+      confettiBurst(40);
+    });
+
+    // Simple confetti
+    const cv = document.getElementById('confetti');
+    const ctx = cv.getContext('2d');
+    let confs = [];
+    function resize(){ cv.width = innerWidth; cv.height = innerHeight }
+    addEventListener('resize', resize); resize();
+
+    function confettiBurst(n=80){
+      for(let i=0;i<n;i++){
+        confs.push({
+          x: rand(0, cv.width), y: rand(-20, 20), r: rand(2,5),
+          vx: rand(-1,1), vy: rand(1,3), a: rand(0, Math.PI*2), va: rand(-0.1,0.1), life: rand(60,120)
+        });
+      }
+    }
+
+    function draw(){
+      ctx.clearRect(0,0,cv.width,cv.height);
+      for(let i=confs.length-1;i>=0;i--){
+        const c=confs[i];
+        c.x+=c.vx; c.y+=c.vy; c.a+=c.va; c.life-=1;
+        ctx.save();
+        ctx.translate(c.x,c.y); ctx.rotate(c.a);
+        ctx.fillStyle = `hsl(${(c.x+c.y)%360}, 100%, 60%)`;
+        ctx.fillRect(-c.r,-c.r,c.r*2,c.r*2);
+        ctx.restore();
+        if(c.y>cv.height+10 || c.life<=0) confs.splice(i,1);
+      }
+      requestAnimationFrame(draw);
+    }
+    draw();
+
+    // Easter egg: secret key to fireworks
+    addEventListener('keydown', (e)=>{
+      if(e.key.toLowerCase() === 'k'){ confettiBurst(180); }
+    });
+  </script></body>
+</html>
